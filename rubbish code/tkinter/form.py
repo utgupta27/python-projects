@@ -1,0 +1,22 @@
+from tkinter import *
+root = Tk()
+root.title("Fill Form ")
+root.geometry("500x350")
+lb1=Label(root,text="Full Name ")
+lb2=Label(root,text="Address ")
+lb=Label(root,text="Enter your details below.")
+lb1.grid(column=0,row=1)
+lb2.grid(column=0,row=2)
+lb.grid(column=0,row=0)
+e1=Entry(root)
+e2=Entry(root)
+e1.grid(column=1,row=1)
+e2.grid(column=1,row=2)
+def clicked():
+    a.configure(text="Congrats, your form is submitted successfully...")
+bt1=Button(root,text="Submit",fg="red",activebackground="blue",command=clicked).grid(row=3)
+a=Label(root,text="")
+a.place(y=100)
+bt=Button(root,fg="red",activebackground="blue",text="Exit",command=root.destroy).place(x=450,y=300)
+mainloop()
+

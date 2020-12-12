@@ -1,0 +1,13 @@
+from tkinter import *
+root = Tk()
+root.title("demo3(GUI) Application")
+root.geometry('350x200')
+menu = Menu(root)
+item= Menu(menu)
+item.add_command(label= "New")
+item.add_command(label="Open")
+item.add_command(label="Save")
+item.add_command(label="Save As")
+menu.add_cascade(label="File",menu=item)
+root.config(menu=menu)
+root.mainloop()
