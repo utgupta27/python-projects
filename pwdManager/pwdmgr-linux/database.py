@@ -16,6 +16,13 @@ class UserBase():
         path = self.getdir() + '/'+ userName + '.db.crypt'
         os.remove(path)
 
+    def connectionEstablish(self,userName):
+        self.conn = sqlite3.connect(userName+'.db')
+        self.cursor = self.conn.cursor()
+
+    def connectionEnd(self,userName):
+        self.conn.commit()
+        self.conn.close()
 
     def verify(self,userName,userPassword):
         try:
@@ -44,8 +51,7 @@ class UserBase():
         cursor = conn.cursor()
         query = "SELECT * FROM USER"
         result = cursor.execute(query)
-        # result = cursor.fetchall()
-        print("Website\t  \t\tUser ID \t \t\tPassword \n")
+        print("Website\t  \tUser ID \t \tPassword \n")
         for i in result:
             print(i[0],end='')
             print("\t->\t",end='')
@@ -63,12 +69,19 @@ class UserBase():
     def addEntry(self,userName,userPassword,site,id,password):
         Encrypt().decryptdata(userName,userPassword)
         self.removeOldDatabase(userName)
-        conn = sqlite3.connect(userName+'.db')
-        cursor = conn.cursor()
-        query = "INSERT INTO USER(SITE,USERNAME,PASSWORD) VALUES('"+site+"','"+id+"','"+password+"');"
-        cursor.execute(query)
-        conn.commit()
-        conn.close()
+        # conn = sqlite3.connect(userName+'.db')
+        # cursor = conn.cursor()
+        self.connectionEstablish(userName)
+        query = "INSERT INTO USER(SITE,USERNAME,PASSWORD) VALUES('"+site+"','"+id+"','"+password+"')"
+        self.cursor.execute(query)
+        self.connectionEnd(userName)
+        # conn.commit()
+        # conn.close()
         Encrypt().encryptdata(userName,userPassword)
         self.removeTemp(userName)
         
+if __name__ == "__main__":
+    obj=UserBase()
+    # obj.createUserAccount("utsav","123")
+    # obj.addEntry("utsav","123","bbbb","bbbb","bbbbb")
+    # obj.showAllPassword("utsav","123")

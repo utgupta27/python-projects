@@ -1,9 +1,13 @@
 import os
 from database import UserBase
+from encrypt import Encrypt
 class menu():
+    def __init__(self):
+        self.obj=UserBase()
+
     def _getDetails(self):
-        self._userName = input("Enter your UserName: ")
-        self._userPassword = input("Enter your Password: ")
+        self.userName = input("Enter your UserName: ")
+        self.userPassword = input("Enter your Password: ")
 
     def _getData(self):
         self.siteName = input("Enter the Name of Website: ")
@@ -29,7 +33,7 @@ class menu():
     def showAllPassMenu(self):
         while True:
             os.system('clear')
-            UserBase().showAllPassword(self._userName,self._userPassword)
+            self.obj.showAllPassword(self.userName,self.userPassword)
             print("""
             2. Go back to previous menu""")
             ch = int(input("Enter Your Choice: "))
@@ -37,23 +41,17 @@ class menu():
                 break
 
     def addMenu(self):
-        while True:
-            os.system('clear')
-            print("""
-            ## Password Added Successfully ##
-            1. Add More Password
-            2. Go back to previous menu""")
-            ch = int(input("Enter Your Choice: "))
-            if ch == 1:
-                self._getData()
-                UserBase().addEntry(self._userName,self._userPassword,self.siteName,self.siteUserName,self.sitePassword)
-            elif ch == 2:
-                break
+        self._getData()
+        UserBase().addEntry(self.userName,self.userPassword,self.siteName,self.siteUserName,self.sitePassword)
+        print("""
+        ## Password Added Successfully ##
+        press enter to continue...""")
+        input("")
 
     def _loginSubMenu(self):
         while True:
             os.system('clear')
-            print("\t**********"+self._userName+"*********")
+            print("\t**********"+self.userName+"*********")
             print("""
             1. Show All Passwords
             2. Add New Password
@@ -65,7 +63,6 @@ class menu():
             if choice == 1:
                 self.showAllPassMenu()
             elif choice == 2:
-                self._getData()
                 self.addMenu()
             elif choice == 3:
                 pass
@@ -81,7 +78,7 @@ class menu():
 
     def _loginMenu(self):
         self._getDetails()
-        if UserBase().verify(self._userName,self._userPassword) == True:
+        if self.obj.verify(self.userName,self.userPassword) == True:
             self._loginSubMenu()
         else :
             print("\n## Incorrect Credentials ##")
@@ -98,7 +95,7 @@ class menu():
             choice =  int(input("Enter Your Choice :"))
             if choice == 1:
                 self._getDetails()
-                UserBase().createUserAccount(self._userName,self._userPassword)
+                self.obj.createUserAccount(self.userName,self.userPassword)
             elif choice==2:
                 break        
 
