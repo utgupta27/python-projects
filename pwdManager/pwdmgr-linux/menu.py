@@ -7,7 +7,7 @@ class menu():
 
     def _mainMenu(self):
         while True:
-            os.system('cls')    
+            os.system('clear')    
             print("""
             1. Login (Existing User)
             2. Create New Account
@@ -22,7 +22,7 @@ class menu():
 
     def showAllPassMenu(self):
         while True:
-            os.system('cls')
+            os.system('clear')
             # call show all Password function to display aal the passwords 
             print("""
             2. Go back to previous menu""")
@@ -33,7 +33,7 @@ class menu():
 
     def _loginSubMenu(self):
         while True:
-            os.system('cls')
+            os.system('clear')
             print("""
             1. Show All Passwords
             2. Add New Password
@@ -69,7 +69,7 @@ class menu():
 
     def _createMenu(self):
         while True:
-            os.system('cls')
+            os.system('clear')
             print("""
             1.Enter New Credentials
             2.Back to Main Menu""")
