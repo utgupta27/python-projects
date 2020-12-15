@@ -63,7 +63,7 @@ class menu():
             3. Remove New Password
             4. Change Master Password
             5. Delete Account
-            6. Logout\n""")
+            6. Logout ---------\n""")
             choice= int(input("Enter Your Choice : "))
             if choice == 1:
                 self.showAllPassMenu()
