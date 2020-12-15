@@ -1,14 +1,30 @@
+"Using SQLite3 database for storing the data locally on the machine"
 import sqlite3
 import os
+"Importing the Encrypt class for encryption and decryption of databases"
 from encrypt import Encrypt
 
-
 class UserBase(): 
+    """
+        This UserBase() class contains all the methods/functions to manipulate
+        the databases using the SQLite3 commands.Also contains some usefull 
+        functions to delete the old and temporary databases.
+    """
 
     def getdir(self):
+        """
+            Uses OS library module to detect the current working directory.That is used 
+            to store the databases of different users.
+            It returns the path->(str) Current working Directory whenever it is called.
+        """
         return os.getcwd()
 
     def removeTemp(self,userName):
+        """
+            This module takes the username & self.path variable and remove any 
+            temporary data that is not being used. 
+            Thus the old databases is cleared successfully.
+        """
         path = self.getdir() + '/'+ userName + '.db'
         os.remove(path)
 
@@ -35,7 +51,6 @@ class UserBase():
             return True
 
     def createUserAccount(self,userName,userPassword):
-        # create a table inside tha database brfore encrypting it
         conn = sqlite3.connect(userName+'.db')
         cursor = conn.cursor()
         cursor.execute('''CREATE TABLE USER(SITE CHAR(50),USERNAME CHAR(50),PASSWORD CHAR(50))''')
@@ -69,14 +84,10 @@ class UserBase():
     def addEntry(self,userName,userPassword,site,id,password):
         Encrypt().decryptdata(userName,userPassword)
         self.removeOldDatabase(userName)
-        # conn = sqlite3.connect(userName+'.db')
-        # cursor = conn.cursor()
         self.connectionEstablish(userName)
         query = "INSERT INTO USER(SITE,USERNAME,PASSWORD) VALUES('"+site+"','"+id+"','"+password+"')"
         self.cursor.execute(query)
         self.connectionEnd(userName)
-        # conn.commit()
-        # conn.close()
         Encrypt().encryptdata(userName,userPassword)
         self.removeTemp(userName)
         
