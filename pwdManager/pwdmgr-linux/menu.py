@@ -3,6 +3,9 @@ from database import UserBase
 from encrypt import Encrypt
 class menu():
     def __init__(self):
+        """
+        creating an object for UserBase() class available in database.py
+        """
         self.obj=UserBase()
 
     def _getDetails(self):
