@@ -15,4 +15,4 @@ def gtrav(m,n):
         return 0
     return gtrav(n-1,m) + gtrav(n,m-1) 
 
-print(gtrav(2,3))
+print(gtrav(18,18))

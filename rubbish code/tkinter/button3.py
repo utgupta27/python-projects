@@ -11,7 +11,7 @@ style.configure('TButton', font =
 
 # Changes will be reflected 
 # by the movement of mouse. 
-style.map('TButton', foreground = [('active', 'green')], 
+style.map('TButton', foreground = [('active', 'black')], 
 					background = [('active', 'black')]) 
 
 # button 1 
