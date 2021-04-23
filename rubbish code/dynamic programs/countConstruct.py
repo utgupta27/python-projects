@@ -26,7 +26,6 @@ def countConstruct(targetString,wordBank):
             print(str(count)+"  count")
     print("end")
     return count
-
 print(countConstruct("purple",["purp","p","le","ur","purpl","purple"]))
 
 #print(countConstruct("enterapotentpot",["a","p","ent","enter","ot","o","t"]))
