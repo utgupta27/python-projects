@@ -11,5 +11,5 @@ def check(num):
         else:
             pass
 if __name__ == '__main__':
-    n = int(input().strip())
-    check(n)
+    # n = int(input().strip())
+    check(39)
