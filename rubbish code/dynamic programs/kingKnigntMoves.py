@@ -1,11 +1,14 @@
-def memoisation(func):
+def memoization(func):
     cache = {}
-    def inner(n,m,a,b):
-        key = str(n) + "," + str(m) + "," + str(a) + "," + str(b)
+
+    def inner(n, m):
+        key = str(n) + "," + str(m)
         if key not in cache:
-            cache[key] = func(n,m,a,b)
+            cache[key] = func(n, m)
         return cache[key]
+
     return inner
+
 
 def checkBorderConstrains(temp):
     for i in range(2):
@@ -46,21 +49,25 @@ def possibleKingsMoves(row, col):
 def moveOfNewCharacter(row, col):
     return possibleKingsMoves(row, col) + possibleKnightMoves(row, col)
 
-@memoisation
-def minimumPossibleMove(srcRow, srcCol, destRow, destCol):
+
+destRow = 6
+destCol = 6
+
+
+@memoization
+def minimumPossibleMove(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
     # if [destRow, destCol] not in moveOfNewCharacter(srcRow, srcCol): return 0
-    if [destRow, destCol] in moveOfNewCharacter(srcRow, srcCol): return 1
-    # count = 0
-    for pos in moveOfNewCharacter(srcRow, srcCol):
-        temp = minimumPossibleMove(srcRow + 1, srcCol, destRow, destCol) \
-               + minimumPossibleMove(srcRow, srcCol + 1, destRow, destCol) \
-               + minimumPossibleMove(srcRow - 1, srcCol, destRow, destCol) \
-               + minimumPossibleMove(srcRow, srcCol - 1, destRow, destCol) \
-               + minimumPossibleMove(srcRow + 1, srcCol + 1, destRow, destCol) \
-               + minimumPossibleMove(srcRow - 1, srcCol - 1, destRow, destCol)
-        print(temp)
+    if [destRow, destCol] in moveOfNewCharacter(srcRow, srcCol):
+        return 1
+
+    return minimumPossibleMove(srcRow + 1, srcCol) \
+           + minimumPossibleMove(srcRow, srcCol + 1) \
+           + minimumPossibleMove(srcRow - 1, srcCol) \
+           + minimumPossibleMove(srcRow, srcCol - 1) \
+           + minimumPossibleMove(srcRow + 1, srcCol + 1) \
+           + minimumPossibleMove(srcRow - 1, srcCol - 1)
 
 if __name__ == '__main__':
-    print(minimumPossibleMove(5,5,8,8))
+    print(minimumPossibleMove(1,1))
