@@ -31,4 +31,3 @@ print(countConstruct("purple",["purp","p","le","ur","purpl","purple"]))
 #print(countConstruct("enterapotentpot",["a","p","ent","enter","ot","o","t"]))
 
 #print(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeee",["e","ee","eee","eeee","eeeee"]))
-    
