@@ -1,2 +1,2 @@
 def foo(n):
-    
+    pass

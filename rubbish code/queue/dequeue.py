@@ -33,10 +33,6 @@ class Dequeue:
     def show_dequeue(self):
         print(self.queue)
 
-    def calculate_score(self,max):
-
-        self.calculate_score()
-
 if __name__ == '__main__':
     q = Dequeue([-10,8,2,1,2,6])
 
