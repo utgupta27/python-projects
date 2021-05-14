@@ -1,3 +1,6 @@
+# A separate function to optimise the solution using function memoisation
+# by passing the whole function to this func: "memoisation()" and storing
+# the previously calculated values.
 def memoization(func):
     cache = {}
 
@@ -11,47 +14,52 @@ def memoization(func):
 
 
 # Some Unnecessary functions that lead to the solution of the problem
-#
-# def checkBorderConstrains(temp):
-#     for i in range(2):
-#         for item in temp:
-#             if item[0] < 1 or item[1] < 1:
-#                 temp.remove(item)
-#     for i in range(3):
-#         for item in temp:
-#             if item[0] > 8 or item[1] > 8:
-#                 temp.remove(item)
-#     return temp
-#
-# def possibleKnightMoves(row, col):
-#     temp = [[row - 1, col - 2],
-#             [row + 1, col - 2],
-#             [row + 2, col - 1],
-#             [row + 2, col + 1],
-#             [row + 1, col + 2],
-#             [row - 1, col + 2],
-#             [row - 2, col + 1],
-#             [row - 2, col - 1], ]
-#     return checkBorderConstrains(temp)
-#
-# def possibleKingsMoves(row, col):
-#     temp = [[row - 1, col - 1],
-#             [row, col - 1],
-#             [row + 1, col - 1],
-#             [row + 1, col + 0],
-#             [row + 1, col + 1],
-#             [row, col + 1],
-#             [row - 1, col + 1],
-#             [row - 1, col], ]
-#     return checkBorderConstrains(temp)
-#
-# def moveOfNewCharacter(row, col):
-#     return possibleKingsMoves(row, col) + possibleKnightMoves(row, col)
+
+# This function is used to check and eliminate the index that are out of the scope
+# of the chess coordinates
+def checkBorderConstrains(temp):
+    for i in range(2):
+        for item in temp:
+            if item[0] < 1 or item[1] < 1:
+                temp.remove(item)
+    for i in range(3):
+        for item in temp:
+            if item[0] > 8 or item[1] > 8:
+                temp.remove(item)
+    return temp
+
+# Below function returns all the possible moves of a Knight in chess
+def possibleKnightMoves(row, col):
+    temp = [[row - 1, col - 2],
+            [row + 1, col - 2],
+            [row + 2, col - 1],
+            [row + 2, col + 1],
+            [row + 1, col + 2],
+            [row - 1, col + 2],
+            [row - 2, col + 1],
+            [row - 2, col - 1], ]
+    return checkBorderConstrains(temp)
+
+# Below function returns all the possible moves of a King in chess
+def possibleKingsMoves(row, col):
+    temp = [[row - 1, col - 1],
+            [row, col - 1],
+            [row + 1, col - 1],
+            [row + 1, col + 0],
+            [row + 1, col + 1],
+            [row, col + 1],
+            [row - 1, col + 1],
+            [row - 1, col], ]
+    return checkBorderConstrains(temp)
+
+# This function returns all the possible moves of a customised character(knight + King)
+def moveOfNewCharacter(row, col):
+    return possibleKingsMoves(row, col) + possibleKnightMoves(row, col)
 
 
 
-# This function combines the move of the Knight and king and returns the set of
-# all possible coordinates form a specific given point.
+# The func: "possibleMoves(row,col)" combines the move of the Knight and king
+# and returns the set of all possible coordinates form a specific given point.
 # [[3, 2], [2, 3], [0, 0], [2, 1], [2, 2], [1, 2]]
 # [[3, 1], [3, 3], [2, 4], [0, 1], [1, 1], [2, 1], [2, 2], [2, 3], [1, 3]]
 # [[2, 1], [3, 2], [3, 4], [2, 5], [0, 2], [1, 2], [2, 2], [2, 3], [2, 4], [1, 4]]
@@ -116,7 +124,6 @@ def memoization(func):
 # [[7, 4], [7, 8], [6, 7], [6, 5], [7, 5], [8, 5], [8, 7], [7, 7], [7, 6]]
 # [[7, 5], [6, 8], [6, 6], [7, 6], [8, 6], [8, 8], [7, 8], [7, 7]]
 # [[7, 6], [6, 7], [7, 7], [8, 7], [7, 8]]
-
 def possibleMoves(row, col):
 
     temp = [[row - 1, col - 2],
@@ -149,7 +156,7 @@ def possibleMoves(row, col):
     return temp
 
 
-# @memoization
+@memoization
 def minimumPossibleMove1(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
@@ -160,7 +167,7 @@ def minimumPossibleMove1(srcRow, srcCol):
                + minimumPossibleMove1(srcRow, srcCol + 1) \
                + minimumPossibleMove1(srcRow + 1, srcCol + 1)
 
-
+@memoization
 def minimumPossibleMove2(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
@@ -171,6 +178,7 @@ def minimumPossibleMove2(srcRow, srcCol):
            + minimumPossibleMove2(srcRow, srcCol - 1) \
            + minimumPossibleMove2(srcRow + 1, srcCol - 1)
 
+@memoization
 def minimumPossibleMove3(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
@@ -181,6 +189,7 @@ def minimumPossibleMove3(srcRow, srcCol):
            + minimumPossibleMove3(srcRow, srcCol + 1) \
            + minimumPossibleMove3(srcRow - 1, srcCol + 1)
 
+@memoization
 def minimumPossibleMove4(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
@@ -205,10 +214,11 @@ def drive(srcRow, srcCol):
 
 if __name__ == '__main__':
     # Destination path(we have to reach this path in minimum number of steps)
-    destRow = 8
-    destCol = 8
+    # the range of the coordinates is form (1,1) to (8,8) including the points (8,8)
+    destRow = 2
+    destCol = 6
 
-    print(drive(1, 1))
+    print( "Total possible Moves to reach destination is : "+ str(drive(1, 1)))
 
 
     # For printing all the possible combination of moves from each Coordinate
