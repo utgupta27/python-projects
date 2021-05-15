@@ -157,60 +157,60 @@ def possibleMoves(row, col):
 
 
 @memoization
-def minimumPossibleMove1(srcRow, srcCol):
+def maxPossibleMove1(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
     # if [destRow, destCol] not in possibleMoves(srcRow, srcCol): return 0
     if [destRow, destCol] in possibleMoves(srcRow, srcCol):
         return 1
-    return minimumPossibleMove1(srcRow + 1, srcCol) \
-               + minimumPossibleMove1(srcRow, srcCol + 1) \
-               + minimumPossibleMove1(srcRow + 1, srcCol + 1)
+    return maxPossibleMove1(srcRow + 1, srcCol) \
+           + maxPossibleMove1(srcRow, srcCol + 1) \
+           + maxPossibleMove1(srcRow + 1, srcCol + 1)
 
 @memoization
-def minimumPossibleMove2(srcRow, srcCol):
+def maxPossibleMove2(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
     # if [destRow, destCol] not in possibleMoves(srcRow, srcCol): return 0
     if [destRow, destCol] in possibleMoves(srcRow, srcCol):
         return 1
-    return minimumPossibleMove2(srcRow + 1, srcCol) \
-           + minimumPossibleMove2(srcRow, srcCol - 1) \
-           + minimumPossibleMove2(srcRow + 1, srcCol - 1)
+    return maxPossibleMove2(srcRow + 1, srcCol) \
+           + maxPossibleMove2(srcRow, srcCol - 1) \
+           + maxPossibleMove2(srcRow + 1, srcCol - 1)
 
 @memoization
-def minimumPossibleMove3(srcRow, srcCol):
+def maxPossibleMove3(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
     # if [destRow, destCol] not in possibleMoves(srcRow, srcCol): return 0
     if [destRow, destCol] in possibleMoves(srcRow, srcCol):
         return 1
-    return minimumPossibleMove3(srcRow - 1, srcCol) \
-           + minimumPossibleMove3(srcRow, srcCol + 1) \
-           + minimumPossibleMove3(srcRow - 1, srcCol + 1)
+    return maxPossibleMove3(srcRow - 1, srcCol) \
+           + maxPossibleMove3(srcRow, srcCol + 1) \
+           + maxPossibleMove3(srcRow - 1, srcCol + 1)
 
 @memoization
-def minimumPossibleMove4(srcRow, srcCol):
+def maxPossibleMove4(srcRow, srcCol):
     if srcRow < 1 or srcRow > 8: return 0
     if srcCol < 1 or srcCol > 8: return 0
     # if [destRow, destCol] not in possibleMoves(srcRow, srcCol): return 0
     if [destRow, destCol] in possibleMoves(srcRow, srcCol):
         return 1
-    return minimumPossibleMove4(srcRow - 1, srcCol) \
-           + minimumPossibleMove4(srcRow, srcCol - 1) \
-           + minimumPossibleMove4(srcRow - 1, srcCol - 1)
+    return maxPossibleMove4(srcRow - 1, srcCol) \
+           + maxPossibleMove4(srcRow, srcCol - 1) \
+           + maxPossibleMove4(srcRow - 1, srcCol - 1)
 
 def drive(srcRow, srcCol):
     if srcRow == destRow and srcCol == destCol:
         return 0
     elif srcRow <= destRow and srcCol <= destCol:
-        return minimumPossibleMove1(srcRow,srcCol)
+        return maxPossibleMove1(srcRow, srcCol)
     elif srcRow > destRow and srcCol < destCol:
-        return minimumPossibleMove3(srcRow, srcCol)
+        return maxPossibleMove3(srcRow, srcCol)
     elif srcRow < destRow and srcCol > destCol:
-        return minimumPossibleMove2(srcRow, srcCol)
+        return maxPossibleMove2(srcRow, srcCol)
     elif srcRow > destRow and srcCol > destCol:
-        return minimumPossibleMove4(srcRow, srcCol)
+        return maxPossibleMove4(srcRow, srcCol)
 
 if __name__ == '__main__':
     # Destination path(we have to reach this path in minimum number of steps)
