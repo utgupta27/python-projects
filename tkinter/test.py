@@ -1,0 +1,11 @@
+from tkinter import *
+root=Tk()
+root.title("demo")
+frame=Frame(root)
+frame.pack()
+button = Button(frame,text='utsav')
+button.pack()
+lable =Label(root,text="my name is utsav").pack()
+button2 = Button(frame, text='gupta')
+button2.pack()
+root.mainloop()
