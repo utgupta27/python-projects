@@ -1,4 +1,5 @@
-# to calculate all the possible combinations of given numbers that sum up to give the targeted number
+# to calculate all the possible combinations of given numbers that sum up to
+# give the targeted number
 
 def memoisation(func):
     cache = {}

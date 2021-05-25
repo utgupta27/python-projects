@@ -51,6 +51,6 @@ def minimumSteps(row,col,dist=100):
 
 
 if __name__ == '__main__':
-    srcRow,srcCol = 2,1
-    destRow,destCol  = 6,7
+    srcRow,srcCol = 1,6
+    destRow,destCol  = 8,8
     print("Minimum No. of steps required is: " + str(minimumSteps(srcRow, srcCol)))
