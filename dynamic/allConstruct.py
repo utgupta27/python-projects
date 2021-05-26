@@ -5,7 +5,7 @@ def allConstruct(targetString,wordBank):
         if targetString.find(word) == 0 :
             suffix = targetString[len(word):]
             result = allConstruct(suffix,wordBank)
-            a = result + 
+            a += result
     return a
 
 
