@@ -1,7 +1,8 @@
 import cv2 as cv
 
-picture = cv.imread("images/butterfly.jpg")
+img = cv.imread('/home/utgupta27/PycharmProjects/python-projects/openCV/images/butterfly.jpg')
 
-print(picture.shape)
-cv.imshow("ImageView", picture)
+print(img.shape)
+
+cv.imshow("ImageView", img)
 cv.waitKey(0)
